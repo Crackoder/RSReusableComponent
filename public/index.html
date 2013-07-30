@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8"/>
+  <title>Backbone, Sinatra and Underscore</title>
+  <style type="text/css">
+    div.component{
+      background-color: #cecece;
+      width: 400px;
+      padding: 10px;
+    }
+
+    a{
+      float:right;
+      margin-right: 10px;
+    }
+
+  </style>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/underscore-min.js"></script>
+  <script type="text/javascript" src="js/backbone-min.js"></script>
+  <script type="text/javascript" src="js/reusable_comp.js"></script>
+  <script type="text/javascript">
+    $(document).ready( function(){
+      var input = new Input({id: 1});
+      collection = new AllInputs([input])
+      var appview = new EditableItem({model: input});
+      input.fetch();
+      $('body').html(appview.el);
+    });
+  </script>
+</head>
+<body>
+</body>
+</html>
