@@ -24,7 +24,7 @@
   <script type="text/javascript">
     $(document).ready( function(){
       var input = new Input({id: 1});
-      collection = new AllInputs([input])
+      var collection = new AllInputs([input]);
       var appview = new EditableItem({model: input});
       input.fetch();
       $('body').html(appview.el);

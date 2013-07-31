@@ -1,10 +1,10 @@
 Backbone.emulateJSON = true;
 template = "<div class='component'> \
     <label><%= input.get('name') %>: </label>\
-    <% if(input.get('edit')){ %>\
+    <% if(edit){ %>\
         <select id='selected_opt'>\
             <% _.each( input.get('values'), function( value ){ %>\
-              <option value=<%= value.name%>><%= value.name%></option>\
+              <option value=<%= value.name%> <%= value.name==input.get('selected_value')?'selected':'' %>><%= value.name%></option>\
             <% }); %>\
         </select>\
         <a href='#' class='cancel'>Cancel</a>\
@@ -16,11 +16,6 @@ template = "<div class='component'> \
     <div>";
 
 Input = Backbone.Model.extend({
-    edit:false,
-
-    changeEditMode: function() {
-        this.set({edit: !this.get("edit")});
-    }
 });
 
 AllInputs = Backbone.Collection.extend({
@@ -29,10 +24,14 @@ AllInputs = Backbone.Collection.extend({
 });
 
 EditableItem = Backbone.View.extend({
+
+  edit:false,
+
   initialize: function(){
       this.listenTo(this.model, 'change', this.render);
       this.$el.html("Name: Unset");
   },
+  
   events: {
       "click .edit"   : "changeEditMode",
       "click .cancel" : "changeEditMode",
@@ -40,19 +39,20 @@ EditableItem = Backbone.View.extend({
     },
 
   changeEditMode: function() {
-      this.model.changeEditMode();
+      this.edit = !this.edit;
+      this.render();
   },
 
   update: function(){
-    var selected = $('#selected_opt').val();
+    var selected = this.$('#selected_opt').val();
     this.model.set({selected_value: selected});
     this.model.save();
-    this.model.changeEditMode();
+    this.changeEditMode();
   },
 
   render: function(){
     var compiled_template = _.template( template );
-    this.$el.html( compiled_template( { input: this.model } ) );
+    this.$el.html( compiled_template( { input: this.model, edit: this.edit } ) );
   }
 
 });
