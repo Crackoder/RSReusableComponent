@@ -21,7 +21,7 @@ post '/input' do
 end
 
 put '/input/:id' do
-  model = JSON.parse(params[:model].to_s)
+  model = JSON.parse(params[:model])
   input = Input.find(model["id"])
   if input
     input.selected_value = model["selected_value"]
