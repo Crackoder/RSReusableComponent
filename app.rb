@@ -6,7 +6,7 @@ get '/' do
 end
 
 get '/mock_data' do
-  Input.create({:name=>"Jhon"})
+  Input.create({:name=>"John"})
   Input.find(1).values.create({:name=>"value1"})
   Input.find(1).values.create({:name=>"value2"})
   Input.find(1).values.create({:name=>"value3"})

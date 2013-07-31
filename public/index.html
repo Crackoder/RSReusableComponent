@@ -23,11 +23,10 @@
   <script type="text/javascript" src="js/reusable_comp.js"></script>
   <script type="text/javascript">
     $(document).ready( function(){
-      var input = new Input({id: 1});
-      var collection = new AllInputs([input]);
-      var appview = new EditableItem({model: input});
-      input.fetch();
-      $('body').html(appview.el);
+      var inputModel = new InputModel({id: 1});
+      var itemView = new ItemView({model: inputModel});
+      inputModel.fetch();
+      $('body').html(itemView.el);
     });
   </script>
 </head>

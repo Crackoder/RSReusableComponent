@@ -15,15 +15,11 @@ template = "<div class='component'> \
     <% } %>\
     <div>";
 
-Input = Backbone.Model.extend({
+InputModel = Backbone.Model.extend({
+  urlRoot: '/input'
 });
 
-AllInputs = Backbone.Collection.extend({
-    model: Input,
-    url: '/input/'
-});
-
-EditableItem = Backbone.View.extend({
+ItemView = Backbone.View.extend({
 
   edit:false,
 
@@ -31,7 +27,7 @@ EditableItem = Backbone.View.extend({
       this.listenTo(this.model, 'change', this.render);
       this.$el.html("Name: Unset");
   },
-  
+
   events: {
       "click .edit"   : "changeEditMode",
       "click .cancel" : "changeEditMode",
