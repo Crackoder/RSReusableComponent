@@ -1,10 +1,6 @@
 require './config/config.rb'
 require 'sinatra'
 
-after do
-  ActiveRecord::Base.connection.close
-end
-
 get '/' do
   send_file File.join(settings.public_folder, 'index.html')
 end

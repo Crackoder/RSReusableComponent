@@ -28,3 +28,4 @@ ActiveRecord::Migration.class_eval do
     belongs_to :input
   end
 end
+ActiveRecord::Base.include_root_in_json = false
